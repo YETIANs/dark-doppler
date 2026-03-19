@@ -3,10 +3,112 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-  <main style="padding: 2rem 0;">
-    <h1 style="font-size: 2.4rem; margin-bottom: 1rem;">你好，我是YETIANs</h1>
-    <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">前端开发者 / 设计师</p>
-    <p style="color: #666; margin-bottom: 2rem;">欢迎来到我的作品集</p>
-    <a href="/projects" style="padding: 0.8rem 1.5rem; background: #000; color: #fff; border-radius: 8px; text-decoration: none;">查看我的作品 →</a>
+  <main style="
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+    text-align: center;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  ">
+
+    <!-- 头像（你的动态图） -->
+<div style="
+  width: 150px;
+  height: 150px;
+  border-radius: 55%;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+">
+  <img 
+    src="/xmdl.gif" 
+    alt="头像" 
+    style="width:100%; height:100%; object-fit: cover;"
+  >
+</div>
+
+    <!-- 标题 -->
+    <h1 style="
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #4f46e5, #d946ef);
+      -webkit-background-clip: text;
+      color: transparent;
+    ">
+      你好，我是 YETIANs
+    </h1>
+
+    <!-- 职业 -->
+    <p style="
+      font-size: 1.4rem;
+      color: #333;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    ">
+      前端开发者 / 设计师
+    </p>
+
+    <!-- 简介 -->
+    <p style="
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    ">
+      专注于网页开发与视觉设计，喜欢创造干净、现代、好用的界面。
+      <br/>
+      欢迎来到我的个人作品集网站。
+    </p>
+
+    <!-- 技能标签 -->
+    <div style="
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+    ">
+      <span style="padding: 0.4rem 1rem; background:#f0f4ff; border-radius:99px; color:#2563eb;">HTML / CSS</span>
+      <span style="padding: 0.4rem 1rem; background:#f0f4ff; border-radius:99px; color:#2563eb;">JavaScript</span>
+      <span style="padding: 0.4rem 1rem; background:#f0f4ff; border-radius:99px; color:#2563eb;">Astro</span>
+      <span style="padding: 0.4rem 1rem; background:#f0f4ff; border-radius:99px; color:#2563eb;">UI 设计</span>
+      <span style="padding: 0.4rem 1rem; background:#f0f4ff; border-radius:99px; color:#2563eb;">响应式开发</span>
+    </div>
+
+    <!-- 按钮组 -->
+    <div style="display: flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+      <a href="/projects" style="
+        padding: 1rem 2rem;
+        background: #2563eb;
+        color: #fff;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 500;
+        box-shadow: 0 4px 12px rgba(37,99,235,0.2);
+        transition: 0.3s;
+      ">
+        📁 查看我的作品
+      </a>
+
+      <a href="/about" style="
+        padding: 1rem 2rem;
+        background: #fff;
+        color: #2563eb;
+        border: 1px solid #2563eb;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+      ">
+        👨‍💻 关于我
+      </a>
+    </div>
+
   </main>
 </Layout>
