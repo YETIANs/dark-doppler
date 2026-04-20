@@ -3,111 +3,243 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-  <main style="
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 4rem 2rem;
-    min-height: 80vh;
-  ">
+	<main>
+		<!-- 页面标题 -->
+		<div class="section-title">
+			<h1 class="gradient-text">关于我</h1>
+			<p>了解更多我的经历、技能与想法</p>
+		</div>
 
-    <!-- 页面标题 -->
-    <div style="text-align: center; margin-bottom: 3rem;">
-      <h1 style="
-        font-size: 2.8rem;
-        font-weight: 700;
-        background: linear-gradient(90deg, #4f46e5, #d946ef);
-        -webkit-background-clip: text;
-        color: transparent;
-        margin-bottom: 0.5rem;
-      ">
-        关于我
-      </h1>
-      <p style="font-size: 1.1rem; color: #666;">
-        了解更多我的经历、技能与想法
-      </p>
-    </div>
+		<!-- 个人简介卡片 -->
+		<div class="card">
+			<h2>👨‍💻 我是谁？</h2>
+			<p>
+				你好，我是 <strong>YETIANs</strong>，一名热爱前端开发与视觉设计的开发者。
+				我喜欢用代码创造干净、现代、有温度的界面，让技术与美学完美结合。
+			</p>
+			<p>
+				从最初写简单的 HTML/CSS，到现在使用 Astro、JavaScript 等现代框架构建完整项目，
+				我始终保持学习热情，不断探索更好的用户体验与交互方式。
+			</p>
+		</div>
 
-    <!-- 个人简介卡片 -->
-    <div style="
-      background: #fff;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-      margin-bottom: 2.5rem;
-    ">
-      <h2 style="font-size: 1.8rem; font-weight: 600; margin-bottom: 1rem; color: #1f2937;">
-        👨‍💻 我是谁？
-      </h2>
-      <p style="font-size: 1.1rem; line-height: 1.8; color: #4b5563; margin-bottom: 1rem;">
-        你好，我是 <strong>YETIANs</strong>，一名热爱前端开发与视觉设计的开发者。
-        我喜欢用代码创造干净、现代、有温度的界面，让技术与美学完美结合。
-      </p>
-      <p style="font-size: 1.1rem; line-height: 1.8; color: #4b5563;">
-        从最初写简单的 HTML/CSS，到现在使用 Astro、JavaScript 等现代框架构建完整项目，
-        我始终保持学习热情，不断探索更好的用户体验与交互方式。
-      </p>
-    </div>
+		<!-- 技能栈 -->
+		<div class="skills-section">
+			<h2>🛠️ 我的技能栈</h2>
+			<div class="skills-grid">
+				<div class="skill-card">
+					<h3>前端开发</h3>
+					<p>HTML / CSS / JavaScript / Astro / React</p>
+					<div class="progress-bar">
+						<div class="progress-fill" style="width: 85%"></div>
+					</div>
+				</div>
+				<div class="skill-card">
+					<h3>设计与工具</h3>
+					<p>Figma / Photoshop / Git / VS Code</p>
+					<div class="progress-bar">
+						<div class="progress-fill" style="width: 75%"></div>
+					</div>
+				</div>
+				<div class="skill-card">
+					<h3>其他能力</h3>
+					<p>响应式开发 / 性能优化 / 交互设计</p>
+					<div class="progress-bar">
+						<div class="progress-fill" style="width: 80%"></div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <!-- 技能栈 -->
-    <div style="margin-bottom: 2.5rem;">
-      <h2 style="font-size: 1.8rem; font-weight: 600; margin-bottom: 1.5rem; color: #1f2937;">
-        🛠️ 我的技能栈
-      </h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-        <div style="background: #f8fafc; padding: 1rem; border-radius: 12px;">
-          <h3 style="font-weight: 600; color: #2563eb; margin-bottom: 0.5rem;">前端开发</h3>
-          <p style="color: #64748b; font-size: 0.95rem;">HTML / CSS / JavaScript / Astro / React</p>
-        </div>
-        <div style="background: #f8fafc; padding: 1rem; border-radius: 12px;">
-          <h3 style="font-weight: 600; color: #2563eb; margin-bottom: 0.5rem;">设计与工具</h3>
-          <p style="color: #64748b; font-size: 0.95rem;">Figma / Photoshop / Git / VS Code</p>
-        </div>
-        <div style="background: #f8fafc; padding: 1rem; border-radius: 12px;">
-          <h3 style="font-weight: 600; color: #2563eb; margin-bottom: 0.5rem;">其他能力</h3>
-          <p style="color: #64748b; font-size: 0.95rem;">响应式开发 / 性能优化 / 交互设计</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- 联系方式 -->
-    <div style="
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 16px;
-      padding: 2rem;
-      color: white;
-      text-align: center;
-    ">
-      <h2 style="font-size: 1.8rem; font-weight: 600; margin-bottom: 1rem;">
-        📬 联系我
-      </h2>
-      <p style="font-size: 1.1rem; margin-bottom: 1.5rem; opacity: 0.9;">
-        如果你对我的作品感兴趣，或者想一起合作，欢迎随时联系我！
-      </p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="mailto:yejun6252@gmail.com" style="
-          padding: 0.8rem 1.5rem;
-          background: rgba(255,255,255,0.2);
-          color: white;
-          border-radius: 10px;
-          text-decoration: none;
-          font-weight: 500;
-          transition: background 0.3s;
-        ">
-          📧 发送邮件
-        </a>
-        <a href="https://github.com/YETIANs" target="_blank" style="
-          padding: 0.8rem 1.5rem;
-          background: rgba(255,255,255,0.2);
-          color: white;
-          border-radius: 10px;
-          text-decoration: none;
-          font-weight: 500;
-          transition: background 0.3s;
-        ">
-          🐱 GitHub
-        </a>
-      </div>
-    </div>
-
-  </main>
+		<!-- 联系方式 -->
+		<div class="contact-banner">
+			<h2>📬 联系我</h2>
+			<p>如果你对我的作品感兴趣，或者想一起合作，欢迎随时联系我！</p>
+			<div class="contact-links">
+				<a href="mailto:yejun6252@gmail.com">📧 发送邮件</a>
+				<a href="https://github.com/YETIANs" target="_blank">🐱 GitHub</a>
+			</div>
+		</div>
+	</main>
 </Layout>
+
+<style>
+	main {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 6rem 2rem 4rem;
+	}
+
+	.section-title {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	.section-title h1 {
+		font-size: 2.8rem;
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+		color: var(--text-primary);
+		transition: color 0.3s;
+	}
+
+	.gradient-text {
+		background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.section-title p {
+		font-size: 1.1rem;
+		color: var(--text-secondary);
+		margin: 0;
+		transition: color 0.3s;
+	}
+
+	/* 卡片 */
+	.card {
+		background: var(--bg-card);
+		border-radius: 16px;
+		padding: 2rem;
+		box-shadow: 0 4px 20px var(--shadow-color);
+		margin-bottom: 2.5rem;
+		border: 1px solid var(--border-color);
+		transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
+	}
+
+	.card h2 {
+		font-size: 1.8rem;
+		font-weight: 600;
+		margin-bottom: 1rem;
+		color: var(--text-primary);
+		transition: color 0.3s;
+	}
+
+	.card p {
+		font-size: 1.1rem;
+		line-height: 1.8;
+		color: var(--text-secondary);
+		margin-bottom: 1rem;
+		transition: color 0.3s;
+	}
+
+	.card p:last-child {
+		margin-bottom: 0;
+	}
+
+	.card:hover {
+		border-color: var(--accent-primary);
+		box-shadow: 0 8px 30px var(--shadow-hover);
+		background: var(--bg-card-hover);
+	}
+
+	/* 技能区 */
+	.skills-section {
+		margin-bottom: 2.5rem;
+	}
+
+	.skills-section h2 {
+		font-size: 1.8rem;
+		font-weight: 600;
+		margin-bottom: 1.5rem;
+		color: var(--text-primary);
+		transition: color 0.3s;
+	}
+
+	.skills-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+	}
+
+	.skill-card {
+		background: var(--bg-card);
+		padding: 1rem;
+		border-radius: 12px;
+		border: 1px solid var(--border-color);
+		transition: background 0.3s, border-color 0.3s;
+	}
+
+	.skill-card:hover {
+		border-color: var(--accent-primary);
+		background: var(--bg-card-hover);
+	}
+
+	.skill-card h3 {
+		font-weight: 600;
+		color: var(--accent-hover);
+		margin-bottom: 0.5rem;
+		margin-top: 0;
+		transition: color 0.3s;
+	}
+
+	.skill-card p {
+		color: var(--text-secondary);
+		font-size: 0.95rem;
+		margin-bottom: 0.8rem;
+		transition: color 0.3s;
+	}
+
+	/* 进度条 */
+	.progress-bar {
+		height: 6px;
+		background: var(--border-color);
+		border-radius: 99px;
+		overflow: hidden;
+		transition: background 0.3s;
+	}
+
+	.progress-fill {
+		height: 100%;
+		background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+		border-radius: 99px;
+	}
+
+	/* 联系横幅 */
+	.contact-banner {
+		background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+		border-radius: 16px;
+		padding: 2rem;
+		color: white;
+		text-align: center;
+	}
+
+	.contact-banner h2 {
+		font-size: 1.8rem;
+		font-weight: 600;
+		margin-bottom: 1rem;
+	}
+
+	.contact-banner p {
+		font-size: 1.1rem;
+		margin-bottom: 1.5rem;
+		opacity: 0.9;
+	}
+
+	.contact-links {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.contact-links a {
+		padding: 0.8rem 1.5rem;
+		background: rgba(255,255,255,0.2);
+		color: white;
+		border-radius: 10px;
+		text-decoration: none;
+		font-weight: 500;
+		transition: background 0.3s;
+	}
+
+	.contact-links a:hover {
+		background: rgba(255,255,255,0.35);
+	}
+
+	@media (max-width: 640px) {
+		main { padding: 5rem 1rem 3rem; }
+		.section-title h1 { font-size: 2rem; }
+	}
+</style>

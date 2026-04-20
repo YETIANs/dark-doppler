@@ -3,112 +3,691 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-  <main style="
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 6rem 2rem;
-    text-align: center;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  ">
+	<!-- 格子背景 -->
+	<div class="grid-bg">
+		<div class="grid-container">
+			<!-- 网格线会通过 CSS 生成 -->
+		</div>
+	</div>
 
-    <!-- 头像（你的动态图） -->
-<div style="
-  width: 150px;
-  height: 150px;
-  border-radius: 55%;
-  overflow: hidden;
-  margin-bottom: 2rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-">
-  <img 
-    src="/xmdl.gif" 
-    alt="头像" 
-    style="width:100%; height:100%; object-fit: cover;"
-  >
-</div>
+	<main>
+		<!-- 头像 -->
+		<div class="avatar-wrap">
+			<img src="/xmdl.gif" alt="头像">
+		</div>
 
-    <!-- 标题 -->
-    <h1 style="
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      background: linear-gradient(90deg, #4f46e5, #d946ef);
-      -webkit-background-clip: text;
-      color: transparent;
-    ">
-      你好，我是 YETIANs
-    </h1>
+		<!-- 标题 - 打字机效果 -->
+		<h1 class="gradient-text typewriter"></h1>
 
-    <!-- 职业 -->
-    <p style="
-      font-size: 1.4rem;
-      color: #333;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    ">
-      前端开发者 / 设计师
-    </p>
+		<!-- 职业 -->
+		<p class="role"></p>
 
-    <!-- 简介 -->
-    <p style="
-      font-size: 1.1rem;
-      color: #666;
-      max-width: 600px;
-      line-height: 1.7;
-      margin-bottom: 2rem;
-    ">
-      专注于网页开发与视觉设计，喜欢创造干净、现代、好用的界面。
-      <br/>
-      欢迎来到我的个人作品集网站。
-    </p>
+		<!-- 简介 -->
+		<p class="desc">
+			专注于网页开发与视觉设计，喜欢创造干净、现代、好用的界面。<br>
+			欢迎来到我的个人作品集网站。
+		</p>
 
-    <!-- 技能标签 -->
-    <div style="
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      justify-content: center;
-      margin-bottom: 3rem;
-    ">
-      <span style="padding: 0.4rem 1rem; background:#f0f4ff; border-radius:99px; color:#2563eb;">HTML / CSS</span>
-      <span style="padding: 0.4rem 1rem; background:#f0f4ff; border-radius:99px; color:#2563eb;">JavaScript</span>
-      <span style="padding: 0.4rem 1rem; background:#f0f4ff; border-radius:99px; color:#2563eb;">Astro</span>
-      <span style="padding: 0.4rem 1rem; background:#f0f4ff; border-radius:99px; color:#2563eb;">UI 设计</span>
-      <span style="padding: 0.4rem 1rem; background:#f0f4ff; border-radius:99px; color:#2563eb;">响应式开发</span>
-    </div>
+		<!-- 技能标签 -->
+		<div class="skill-tags">
+			<span>UI / UX 设计</span>
+			<span>Figma</span>
+			<span>原型设计</span>
+		</div>
 
-    <!-- 按钮组 -->
-    <div style="display: flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
-      <a href="/projects" style="
-        padding: 1rem 2rem;
-        background: #2563eb;
-        color: #fff;
-        border-radius: 12px;
-        text-decoration: none;
-        font-weight: 500;
-        box-shadow: 0 4px 12px rgba(37,99,235,0.2);
-        transition: 0.3s;
-      ">
-        📁 查看我的作品
-      </a>
+		<!-- 证书区块 -->
+		<div class="cert-section">
+			<div class="cert-stack" id="certStack">
+				<div class="cert-item cert-basic" data-level="basic">
+					<div class="cert-level">基础</div>
+					<div class="cert-detail">
+						<div class="cert-school">香港大学专业进修学院 HKU SPACE</div>
+						<div class="cert-course">UX/UI Design Basic Certificate</div>
+						<div class="cert-meta">2024 · With Merit</div>
+					</div>
+				</div>
+				<div class="cert-item cert-intermediate" data-level="intermediate">
+					<div class="cert-level">中阶</div>
+					<div class="cert-detail">
+						<div class="cert-school">香港大学专业进修学院 HKU SPACE</div>
+						<div class="cert-course">UX/UI Design Intermediate Certificate</div>
+						<div class="cert-meta">2024 · With Distinction</div>
+					</div>
+				</div>
+				<div class="cert-item cert-advanced" data-level="advanced">
+					<div class="cert-level">进阶</div>
+					<div class="cert-detail">
+						<div class="cert-school">香港大学专业进修学院 HKU SPACE</div>
+						<div class="cert-course">UX/UI Design Advanced Certificate</div>
+						<div class="cert-meta">2025 · With Distinction</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-      <a href="/about" style="
-        padding: 1rem 2rem;
-        background: #fff;
-        color: #2563eb;
-        border: 1px solid #2563eb;
-        border-radius: 12px;
-        text-decoration: none;
-        font-weight: 500;
-        transition: 0.3s;
-      ">
-        👨‍💻 关于我
-      </a>
-    </div>
+		<!-- 按钮组 -->
+		<div class="btn-group">
+			<a href="/projects" class="btn-primary">📁 查看我的作品</a>
+			<a href="/about" class="btn-outline">👨‍💻 关于我</a>
+		</div>
+	</main>
 
-  </main>
-</Layout>
+<script is:inline>
+	const stack = document.getElementById('certStack');
+	
+	// 初始化 z-index
+	const initCards = stack.querySelectorAll('.cert-item');
+	initCards.forEach((card, i) => {
+		card.style.zIndex = i + 1;
+	});
+
+	// 鼠标挪到整个堆叠区域上：散开
+	stack.addEventListener('mouseenter', () => {
+		const cards = stack.querySelectorAll('.cert-item');
+		const offsetStep = 55;
+		const rotateStep = 5;
+		cards.forEach((card, i) => {
+			const layer = cards.length - 1 - i;
+			card.style.transform = `translateY(-${layer * offsetStep}px) translateX(${layer * 6}px) rotate(${layer * rotateStep}deg)`;
+		});
+	});
+
+	// 鼠标移开：回到重叠状态
+	stack.addEventListener('mouseleave', () => {
+		const cards = stack.querySelectorAll('.cert-item');
+		cards.forEach(card => {
+			card.style.transform = 'none';
+		});
+	});
+
+	// 点击卡片：挪到最上面
+	stack.querySelectorAll('.cert-item').forEach(card => {
+		card.addEventListener('click', () => {
+			stack.appendChild(card);
+			// 更新 z-index
+			const currentCards = stack.querySelectorAll('.cert-item');
+			currentCards.forEach((c, i) => {
+				c.style.zIndex = i + 1;
+			});
+			card.style.zIndex = currentCards.length;
+		});
+	});
+
+	// 打字机效果 - 烟雾消散版
+	(function() {
+		const titleEl = document.querySelector('h1.typewriter');
+		const roleEl = document.querySelector('p.role');
+		const titleText = '你好，我是 YETIANs';
+		const roleTexts = ['前端开发者', '设计师', 'UI/UX 设计师'];
+		let titleIndex = 0;
+		let roleIndex = 0;
+		let isDeleting = false;
+		let currentRole = '';
+		
+		// 添加光标
+		const cursor = document.createElement('span');
+		cursor.className = 'typewriter-cursor';
+		cursor.textContent = '|';
+		roleEl.appendChild(cursor);
+		
+		function blinkCursor() {
+			cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+		}
+		let cursorInterval = setInterval(blinkCursor, 530);
+
+		// 创建烟雾粒子 - 直接在字符位置
+		function createSmoke(charEl) {
+			// 每次创建2-3个烟粒子
+			const count = 2 + Math.floor(Math.random() * 2);
+			for (let i = 0; i < count; i++) {
+				const particle = document.createElement('span');
+				particle.className = 'smoke-particle';
+				
+				const size = 4 + Math.random() * 6;
+				particle.style.width = size + 'px';
+				particle.style.height = size + 'px';
+				particle.style.left = (Math.random() * 0.4 + 0.3) + 'em';
+				particle.style.top = (Math.random() * 0.2) + 'em';
+				particle.style.setProperty('--tx', (Math.random() - 0.5) * 20 + 'px');
+				particle.style.setProperty('--ty', -(Math.random() * 30 + 15) + 'px');
+				particle.style.animationDelay = (i * 30) + 'ms';
+				
+				charEl.parentNode.insertBefore(particle, charEl);
+				setTimeout(() => particle.remove(), 1000);
+			}
+		}
+		
+		// 创建彩色光球粒子 - 喷到页面级别自由飘浮
+		function createOrbParticles(charEl) {
+			// 火焰颜色
+			const colors = ['#ff3300', '#ff4400', '#ff5500', '#ff6600', '#ff8800', '#ffaa00', '#ffcc00', '#ff2200', '#ff0000'];
+			const count = 4 + Math.floor(Math.random() * 3);
+			
+			// 获取字符在页面中的绝对位置
+			const rect = charEl.getBoundingClientRect();
+			
+			for (let i = 0; i < count; i++) {
+				const orb = document.createElement('div');
+				orb.className = 'orb-particle floating';
+				const color = colors[Math.floor(Math.random() * colors.length)];
+				orb.style.background = `radial-gradient(circle, ${color} 0%, rgba(255,100,0,0.6) 50%, transparent 100%)`;
+				orb.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}, 0 0 30px rgba(255,100,0,0.5)`;
+				
+				const size = 4 + Math.random() * 6;
+				orb.style.width = size + 'px';
+				orb.style.height = size + 'px';
+				
+				// 从字符在页面中的绝对位置开始
+				orb.style.left = (rect.left + Math.random() * rect.width) + 'px';
+				orb.style.top = rect.top + 'px';
+				
+				// 喷出方向 - 向右上飘浮
+				const angle = -30 - Math.random() * 30; // 向上偏右
+				const distance = 80 + Math.random() * 100;
+				const ox = Math.cos(angle * Math.PI / 180) * distance;
+				const oy = Math.sin(angle * Math.PI / 180) * distance;
+				orb.style.setProperty('--ox', ox + 'px');
+				orb.style.setProperty('--oy', oy + 'px');
+				orb.style.animationDelay = (i * 60) + 'ms';
+				
+				// 添加到body
+				document.body.appendChild(orb);
+				// 飘浮4秒后消失
+				setTimeout(() => orb.remove(), 4000 + i * 200);
+			}
+		}
+
+		// 用span包裹每个字
+		function renderChars(text, container) {
+			container.innerHTML = '';
+			for (let char of text) {
+				const span = document.createElement('span');
+				span.className = 'char';
+				span.textContent = char;
+				container.appendChild(span);
+			}
+			container.appendChild(cursor);
+		}
+
+		// 逐字删除 + 烟雾 + 光球 + 颜色渐变效果
+		function deleteChars() {
+			const chars = roleEl.querySelectorAll('.char');
+			if (chars.length === 0) {
+				isDeleting = false;
+				roleIndex++;
+				currentRole = '';
+				roleEl.classList.remove('burning');
+				setTimeout(typeRole, 300);
+				return;
+			}
+			
+			// 获取最后一个字
+			const lastChar = chars[chars.length - 1];
+			
+			// 在字符位置创建烟雾
+			createSmoke(lastChar);
+			
+			// 颜色渐变燃烧效果 - 更深的火焰色 + 描边
+			const burnColors = ['#cc0000', '#ee2200', '#ff3300', '#ff5500', '#ff7700', '#ff9900'];
+			let colorIndex = 0;
+			
+			const burnInterval = setInterval(() => {
+				if (colorIndex < burnColors.length) {
+					const c = burnColors[colorIndex];
+					lastChar.style.color = c;
+					lastChar.style.textShadow = `
+						0 0 5px ${c},
+						0 0 10px ${c},
+						0 0 20px ${c},
+						-1px -1px 0 #000,
+						1px -1px 0 #000,
+						-1px 1px 0 #000,
+						1px 1px 0 #000
+					`;
+					lastChar.style.transform = `translateY(${-colorIndex * 2}px) scale(${1 - colorIndex * 0.05})`;
+					colorIndex++;
+				} else {
+					clearInterval(burnInterval);
+				}
+			}, 50);
+			
+			// 创建光球
+			setTimeout(() => {
+				createOrbParticles(lastChar);
+			}, 150);
+			
+			// 移除字符 - 先渐变透明
+			setTimeout(() => {
+				lastChar.style.transition = 'opacity 0.15s ease-out, filter 0.15s ease-out';
+				lastChar.style.opacity = '0';
+				lastChar.style.filter = 'blur(2px)';
+			}, 220);
+			
+			setTimeout(() => {
+				lastChar.remove();
+				setTimeout(deleteChars, 50);
+			}, 370);
+		}
+		
+
+		
+
+		function typeTitle() {
+			if (titleIndex < titleText.length) {
+				titleEl.textContent = titleText.substring(0, titleIndex + 1);
+				titleIndex++;
+				setTimeout(typeTitle, 80);
+			} else {
+				setTimeout(typeRole, 400);
+			}
+		}
+
+		function typeRole() {
+			const target = roleTexts[roleIndex % roleTexts.length];
+			if (!isDeleting) {
+				currentRole += target.charAt(currentRole.length);
+				renderChars(currentRole, roleEl);
+				if (currentRole === target) {
+					isDeleting = true;
+					setTimeout(deleteChars, 1800);
+				} else {
+					setTimeout(typeRole, 70);
+				}
+			} else {
+				// 等待删除完成
+				setTimeout(typeRole, 100);
+			}
+		}
+
+		setTimeout(typeTitle, 300);
+	})();
+</script>
+
+<style>
+	/* 格子背景 */
+	.grid-bg {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+		z-index: 0;
+		overflow: hidden;
+	}
+
+	.grid-container {
+		position: absolute;
+		top: -50%;
+		left: -50%;
+		width: 200%;
+		height: 200%;
+		background-color: var(--bg-secondary);
+		background-image: 
+			/* 横线 */
+			linear-gradient(to right, rgba(99, 102, 241, 0.3) 1px, transparent 1px),
+			linear-gradient(to bottom, rgba(99, 102, 241, 0.3) 1px, transparent 1px);
+		background-size: 80px 80px;
+		animation: gridPulse 4s ease-in-out infinite;
+		transform: rotate(-30deg);
+		transform-origin: center center;
+		transition: background-color 0.3s;
+	}
+
+	/* 对角线装饰 */
+	.grid-container::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: 
+			linear-gradient(135deg, transparent 49.5%, rgba(217, 70, 239, 0.1) 49.5%, rgba(217, 70, 239, 0.1) 50.5%, transparent 50.5%),
+			linear-gradient(45deg, transparent 49.5%, rgba(99, 102, 241, 0.1) 49.5%, rgba(99, 102, 241, 0.1) 50.5%, transparent 50.5%);
+		background-size: 160px 160px;
+		transform: rotate(-30deg);
+		transform-origin: center center;
+	}
+
+	/* 中心高亮区域 */
+	.grid-container::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 600px;
+		height: 600px;
+		background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+		animation: centerGlow 3s ease-in-out infinite alternate;
+	}
+
+	@keyframes gridPulse {
+		0%, 100% { opacity: 0.6; }
+		50% { opacity: 1; }
+	}
+
+	@keyframes centerGlow {
+		0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.95); }
+		100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.05); }
+	}
+
+	main {
+		position: relative;
+		z-index: 1;
+		min-height: 100vh;
+		padding-top: 60px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding-left: 2rem;
+		padding-right: 2rem;
+		padding-bottom: 4rem;
+		text-align: center;
+	}
+
+	.avatar-wrap {
+		width: 150px;
+		height: 150px;
+		border-radius: 55%;
+		overflow: hidden;
+		margin-bottom: 2rem;
+		box-shadow: 0 8px 20px var(--shadow-color);
+		transition: box-shadow 0.3s;
+	}
+
+	.avatar-wrap img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	h1 {
+		font-size: 3rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+		color: var(--text-primary);
+		transition: color 0.3s;
+	}
+
+	.gradient-text {
+		background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.role {
+		font-size: 1.4rem;
+		color: var(--text-primary);
+		margin-bottom: 0.5rem;
+		font-weight: 500;
+		min-height: 2rem;
+		position: relative;
+		transition: color 0.3s;
+	}
+	
+	.typewriter-cursor {
+		color: var(--accent-primary);
+		font-weight: 400;
+		animation: none;
+		margin-left: 2px;
+		transition: color 0.3s;
+	}
+	
+	/* 灰飞烟灭效果 */
+	.role.burning {
+		animation: burningGlow 0.4s ease-in-out infinite alternate;
+	}
+
+	@keyframes burningGlow {
+		0% {
+			filter: brightness(1);
+		}
+		100% {
+			filter: brightness(1.1);
+		}
+	}
+	
+	/* 火星粒子 */
+	.spark {
+		position: absolute;
+		width: 4px;
+		height: 4px;
+		background: #ff6b35;
+		border-radius: 50%;
+		pointer-events: none;
+		animation: sparkFly 0.8s ease-out forwards;
+		box-shadow: 0 0 6px #ff6b35, 0 0 10px #ff4500;
+	}
+	
+	.spark.orange { background: #ffaa00; box-shadow: 0 0 6px #ffaa00, 0 0 10px #ff8800; }
+	.spark.red { background: #ff4444; box-shadow: 0 0 6px #ff4444, 0 0 10px #ff2222; }
+	.spark.white { background: #fff5e6; box-shadow: 0 0 6px #fff5e6, 0 0 10px #ffcc88; }
+	
+	@keyframes sparkFly {
+		0% {
+			opacity: 1;
+			transform: translate(0, 0) scale(1);
+		}
+		50% {
+			opacity: 0.8;
+		}
+		100% {
+			opacity: 0;
+			transform: translate(var(--tx, 20px), var(--ty, -40px)) scale(0.3);
+		}
+	}
+	
+	/* 单字样式 */
+	.char {
+		display: inline-block;
+	}
+	
+	/* 烟雾粒子 */
+	.smoke-particle {
+		position: absolute;
+		background: radial-gradient(circle, rgba(180, 180, 180, 0.5) 0%, rgba(150, 150, 150, 0.2) 50%, transparent 70%);
+		border-radius: 50%;
+		pointer-events: none;
+		animation: smokeRise 1s ease-out forwards;
+		display: inline-block;
+	}
+	
+	@keyframes smokeRise {
+		0% {
+			opacity: 0.6;
+			transform: translate(0, 0) scale(0.5);
+		}
+		50% {
+			opacity: 0.3;
+		}
+		100% {
+			opacity: 0;
+			transform: translate(var(--tx), var(--ty)) scale(1.5);
+		}
+	}
+	
+	/* 彩色光球粒子 - 用:global因为粒子会添加到body */
+	:global(.orb-particle) {
+		position: fixed;
+		border-radius: 50%;
+		pointer-events: none;
+		z-index: 9999;
+	}
+	
+	:global(.orb-particle.floating) {
+		animation: orbFloat 4s ease-out forwards;
+	}
+	
+	@keyframes orbFloat {
+		0% {
+			opacity: 1;
+			transform: translate(0, 0) scale(1);
+		}
+		30% {
+			opacity: 0.8;
+		}
+		70% {
+			opacity: 0.4;
+		}
+		100% {
+			opacity: 0;
+			transform: translate(var(--ox), var(--oy)) scale(0.2);
+		}
+	}
+
+	.desc {
+		font-size: 1.1rem;
+		color: var(--text-secondary);
+		max-width: 600px;
+		line-height: 1.7;
+		margin-bottom: 2rem;
+		transition: color 0.3s;
+	}
+
+	.skill-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+		justify-content: center;
+		margin-bottom: 3rem;
+	}
+
+	.skill-tags span {
+		padding: 0.4rem 1rem;
+		background: var(--hover-bg);
+		border-radius: 99px;
+		color: var(--accent-hover);
+		font-size: 0.9rem;
+		transition: background 0.3s, color 0.3s;
+	}
+
+	/* 证书区块 */
+	.cert-section {
+		margin-top: 1.5rem;
+		margin-bottom: 2rem;
+	}
+
+	.cert-stack {
+		position: relative;
+		width: 320px;
+		height: 240px;
+		cursor: pointer;
+	}
+
+	.cert-item {
+		position: absolute;
+		width: 100%;
+		padding: 1rem 1.2rem;
+		border-radius: 16px;
+		border: 1px solid var(--border-color);
+		background: var(--bg-card);
+		box-shadow: 0 4px 16px var(--shadow-color);
+		cursor: pointer;
+		transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+		            box-shadow 0.3s,
+		            border-color 0.3s,
+					background 0.3s;
+		user-select: none;
+	}
+
+	/* 悬停高亮 */
+	.cert-item:hover {
+		box-shadow: 0 16px 40px var(--shadow-hover);
+		border-color: var(--accent-primary);
+		background: var(--bg-card-hover);
+	}
+
+	.cert-level {
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-bottom: 0.5rem;
+		color: var(--text-secondary);
+	}
+
+	.cert-advanced .cert-level { color: var(--accent-primary); }
+	.cert-intermediate .cert-level { color: #7c3aed; }
+	.cert-basic .cert-level { color: var(--text-secondary); }
+
+	.cert-detail {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+
+	.cert-school {
+		font-weight: 700;
+		font-size: 0.85rem;
+		color: var(--accent-primary);
+		transition: color 0.3s;
+	}
+
+	.cert-course {
+		font-size: 0.9rem;
+		color: var(--text-primary);
+		font-weight: 500;
+		transition: color 0.3s;
+	}
+
+	.cert-meta {
+		font-size: 0.8rem;
+		color: var(--text-secondary);
+		margin-top: 0.25rem;
+		transition: color 0.3s;
+	}
+
+	.btn-group {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.btn-primary {
+		padding: 1rem 2rem;
+		background: var(--accent-hover);
+		color: #fff;
+		border-radius: 12px;
+		text-decoration: none;
+		font-weight: 500;
+		box-shadow: 0 4px 12px rgba(37,99,235,0.2);
+		transition: 0.3s;
+	}
+
+	.btn-primary:hover {
+		background: var(--accent-primary);
+		transform: translateY(-2px);
+	}
+
+	.btn-outline {
+		padding: 1rem 2rem;
+		background: var(--bg-card);
+		color: var(--accent-hover);
+		border: 1px solid var(--accent-hover);
+		border-radius: 12px;
+		text-decoration: none;
+		font-weight: 500;
+		transition: 0.3s;
+	}
+
+	.btn-outline:hover {
+		background: var(--hover-bg);
+		transform: translateY(-2px);
+	}
+
+	/* 卡片悬停 */
+	.project-card:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 12px 32px var(--shadow-hover);
+		border-color: var(--accent-secondary);
+		background: var(--bg-card-hover);
+	}
+
+	@media (max-width: 640px) {
+		h1 { font-size: 2rem; }
+	}
+</style>

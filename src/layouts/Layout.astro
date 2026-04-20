@@ -1,23 +1,468 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>YETIANs - 个人作品集</title>
+		<script is:inline>
+			// 页面加载时恢复主题（优先用户选择，其次跟随系统）
+			(function() {
+				const savedTheme = localStorage.getItem('theme');
+				if (savedTheme) {
+					document.documentElement.setAttribute('data-theme', savedTheme);
+				}
+			})();
+		</script>
 	</head>
 	<body>
+		<!-- 粒子背景 -->
+		<canvas id="particle-canvas"></canvas>
+
+		<!-- 滚动进度条 -->
+		<div id="progress-bar"></div>
+
+		<!-- 导航栏 -->
+		<nav>
+			<a href="/" class="logo">YETIANs</a>
+			<ul>
+				<li><a href="/">首页</a></li>
+				<li><a href="/projects">作品</a></li>
+				<li><a href="/about">关于我</a></li>
+			</ul>
+			<!-- 主题切换按钮 -->
+			<button id="theme-toggle" aria-label="切换主题">
+				<span class="icon sun">☀️</span>
+				<span class="icon moon">🌙</span>
+			</button>
+		</nav>
+
 		<slot />
+
+		<!-- 页脚 -->
+		<footer>
+			<p>© 2026 YETIANs · Built with ❤️</p>
+		</footer>
+
+		<script is:inline>
+			// 滚动进度条
+			window.addEventListener('scroll', function() {
+				const bar = document.getElementById('progress-bar');
+				if (bar) {
+					const scrollTop = window.scrollY;
+					const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+					const progress = (scrollTop / docHeight) * 100;
+					bar.style.width = progress + '%';
+				}
+			});
+
+			// 主题切换（支持自动跟随系统 + 手动覆盖）
+			const toggle = document.getElementById('theme-toggle');
+			const html = document.documentElement;
+
+			function getCurrentTheme() {
+				return html.getAttribute('data-theme') || 
+					   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+			}
+
+			function isDark() {
+				return getCurrentTheme() === 'dark';
+			}
+
+			function updateThemeIcon() {
+				const dark = isDark();
+				document.querySelectorAll('#theme-toggle .icon').forEach(function(el) {
+					el.style.display = 'none';
+				});
+				if (dark) {
+					document.querySelector('#theme-toggle .sun').style.display = 'inline';
+				} else {
+					document.querySelector('#theme-toggle .moon').style.display = 'inline';
+				}
+			}
+
+			if (toggle) {
+				toggle.addEventListener('click', function() {
+					const current = getCurrentTheme();
+					const next = current === 'dark' ? 'light' : 'dark';
+					html.setAttribute('data-theme', next);
+					localStorage.setItem('theme', next);
+					updateThemeIcon();
+					updateParticleColors();
+				});
+				updateThemeIcon();
+			}
+
+			// 更新粒子颜色
+			function updateParticleColors() {
+				const canvas = document.getElementById('particle-canvas');
+				if (!canvas) return;
+				// 触发粒子重新初始化
+				window.dispatchEvent(new CustomEvent('themechange', { 
+					detail: { isDark: isDark() } 
+				}));
+			}
+
+			// 监听系统主题变化
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+				if (!localStorage.getItem('theme')) {
+					html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+					updateThemeIcon();
+					updateParticleColors();
+				}
+			});
+		</script>
+
+		<!-- 粒子背景动画 -->
+		<script is:inline>
+			(function() {
+				const canvas = document.getElementById('particle-canvas');
+				const ctx = canvas.getContext('2d');
+				let particles = [];
+				let mouseX = 0, mouseY = 0;
+
+				function resize() {
+					canvas.width = window.innerWidth;
+					canvas.height = window.innerHeight;
+				}
+				resize();
+				window.addEventListener('resize', resize);
+
+				// 根据当前主题获取颜色
+				function getThemeColors() {
+					const theme = document.documentElement.getAttribute('data-theme') || 
+								   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+					const isDark = theme === 'dark';
+					return {
+						particle: isDark ? '129, 140, 248' : '99, 102, 241',
+						line: isDark ? '129, 140, 248' : '139, 92, 246',
+						particleAlpha: isDark ? 0.5 : 0.6,
+						lineAlpha: isDark ? 0.25 : 0.3
+					};
+				}
+
+				let colors = getThemeColors();
+
+				class Particle {
+					constructor() {
+						this.x = Math.random() * canvas.width;
+						this.y = Math.random() * canvas.height;
+						this.size = Math.random() * 2 + 1;
+						this.speedX = (Math.random() - 0.5) * 0.5;
+						this.speedY = (Math.random() - 0.5) * 0.5;
+					}
+					update() {
+						this.x += this.speedX;
+						this.y += this.speedY;
+						if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+						if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+						// 鼠标排斥
+						const dx = mouseX - this.x;
+						const dy = mouseY - this.y;
+						const dist = Math.sqrt(dx * dx + dy * dy);
+						if (dist < 100) {
+							this.x -= dx * 0.02;
+							this.y -= dy * 0.02;
+						}
+					}
+					draw() {
+						ctx.fillStyle = 'rgba(' + colors.particle + ', ' + colors.particleAlpha + ')';
+						ctx.beginPath();
+						ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+						ctx.fill();
+					}
+				}
+
+				function init() {
+					particles = [];
+					for (let i = 0; i < 60; i++) {
+						particles.push(new Particle());
+					}
+				}
+				init();
+
+				document.addEventListener('mousemove', function(e) {
+					mouseX = e.clientX;
+					mouseY = e.clientY;
+				});
+
+				function animate() {
+					colors = getThemeColors(); // 每次动画都获取最新颜色
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+					particles.forEach(p => {
+						p.update();
+						p.draw();
+					});
+					// 画连线
+					for (let i = 0; i < particles.length; i++) {
+						for (let j = i + 1; j < particles.length; j++) {
+							const dx = particles[i].x - particles[j].x;
+							const dy = particles[i].y - particles[j].y;
+							const dist = Math.sqrt(dx * dx + dy * dy);
+							if (dist < 150) {
+								ctx.strokeStyle = 'rgba(' + colors.line + ', ' + (1 - dist / 150) * colors.lineAlpha + ')';
+								ctx.lineWidth = 0.5;
+								ctx.beginPath();
+								ctx.moveTo(particles[i].x, particles[i].y);
+								ctx.lineTo(particles[j].x, particles[j].y);
+								ctx.stroke();
+							}
+						}
+					}
+					requestAnimationFrame(animate);
+				}
+				animate();
+
+				// 监听主题变化
+				window.addEventListener('themechange', function() {
+					colors = getThemeColors();
+				});
+			})();
+		</script>
 	</body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
+	/* CSS 变量系统 - 浅色/深色模式对比色 */
+	:root {
+		/* ===== 浅色模式 ===== */
+		/* 背景色 - 纯白系 */
+		--bg-primary: #ffffff;
+		--bg-secondary: #f8f9fc;
+		--bg-nav: rgba(255, 255, 255, 0.92);
+		--bg-card: #ffffff;
+		--bg-card-hover: #f8f9fc;
+		
+		/* 文字色 - 深色系（高对比） */
+		--text-primary: #0f172a;      /* 近黑色 - 主要文字 */
+		--text-secondary: #475569;    /* 深灰色 - 次要文字 */
+		--text-nav: #1e293b;          /* 深蓝灰 - 导航文字 */
+		
+		/* 强调色 - 鲜艳蓝紫 */
+		--accent-primary: #4f46e5;     /* 靛蓝 */
+		--accent-secondary: #d946ef;   /* 品红 */
+		--accent-hover: #2563eb;      /* 蓝色 */
+		
+		/* 边框色 - 浅灰 */
+		--border-color: #e2e8f0;
+		--border-nav: #f1f5f9;
+		
+		/* 交互色 */
+		--hover-bg: #eef2ff;          /* 浅蓝紫 */
+		--hover-text: #4338ca;        /* 深靛蓝 */
+		
+		/* 阴影 - 浅色柔和 */
+		--shadow-color: rgba(148, 163, 184, 0.15);
+		--shadow-hover: rgba(79, 70, 229, 0.2);
+	}
+
+	/* ===== 深色模式 - 高对比 ===== */
+	[data-theme="dark"] {
+		/* 背景色 - 深邃黑 */
+		--bg-primary: #09090b;        /* 接近纯黑 */
+		--bg-secondary: #18181b;      /* 深灰黑 */
+		--bg-nav: rgba(9, 9, 11, 0.92);
+		--bg-card: #18181b;
+		--bg-card-hover: #27272a;
+		
+		/* 文字色 - 明亮白色（高对比） */
+		--text-primary: #fafafa;      /* 纯白 - 主要文字 */
+		--text-secondary: #d4d4d8;     /* 亮灰 - 次要文字 */
+		--text-nav: #f4f4f5;          /* 亮白 - 导航文字 */
+		
+		/* 强调色 - 亮丽紫蓝（深色模式下更鲜艳） */
+		--accent-primary: #a5b4fc;    /* 亮紫蓝 */
+		--accent-secondary: #f0abfc;   /* 亮粉紫 */
+		--accent-hover: #818cf8;      /* 中紫蓝 */
+		
+		/* 边框色 - 深灰 */
+		--border-color: #3f3f46;
+		--border-nav: #27272a;
+		
+		/* 交互色 */
+		--hover-bg: #1e1b4b;           /* 深紫 */
+		--hover-text: #c7d2fe;         /* 浅紫蓝 */
+		
+		/* 阴影 - 深色浓重 */
+		--shadow-color: rgba(0, 0, 0, 0.5);
+		--shadow-hover: rgba(129, 140, 248, 0.3);
+	}
+
+	/* 跟随系统主题 */
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme="light"]) {
+			/* 背景色 - 深邃黑 */
+			--bg-primary: #09090b;
+			--bg-secondary: #18181b;
+			--bg-nav: rgba(9, 9, 11, 0.92);
+			--bg-card: #18181b;
+			--bg-card-hover: #27272a;
+			
+			/* 文字色 - 明亮白色 */
+			--text-primary: #fafafa;
+			--text-secondary: #d4d4d8;
+			--text-nav: #f4f4f5;
+			
+			/* 强调色 - 亮丽紫蓝 */
+			--accent-primary: #a5b4fc;
+			--accent-secondary: #f0abfc;
+			--accent-hover: #818cf8;
+			
+			/* 边框色 */
+			--border-color: #3f3f46;
+			--border-nav: #27272a;
+			
+			/* 交互色 */
+			--hover-bg: #1e1b4b;
+			--hover-text: #c7d2fe;
+			
+			/* 阴影 */
+			--shadow-color: rgba(0, 0, 0, 0.5);
+			--shadow-hover: rgba(129, 140, 248, 0.3);
+		}
+	}
+
+	/* 粒子画布 */
+	#particle-canvas {
+		position: fixed;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	/* 进度条 */
+	#progress-bar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 3px;
+		width: 0%;
+		background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+		z-index: 9999;
+		transition: width 0.1s ease;
+	}
+
+	/* 导航栏 */
+	nav {
+		position: fixed;
+		top: 3px;
+		left: 0;
+		right: 0;
+		z-index: 100;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 2rem;
+		height: 60px;
+		background: var(--bg-nav);
+		backdrop-filter: blur(12px);
+		border-bottom: 1px solid var(--border-nav);
+		transition: background 0.3s, border-color 0.3s;
+	}
+
+	nav .logo {
+		font-weight: 700;
+		font-size: 1.2rem;
+		text-decoration: none;
+		background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		transition: filter 0.3s;
+	}
+
+	nav ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		gap: 1.5rem;
+	}
+
+	nav ul a {
+		text-decoration: none;
+		color: var(--text-nav);
+		font-size: 0.95rem;
+		font-weight: 500;
+		padding: 0.3rem 0.8rem;
+		border-radius: 8px;
+		transition: background 0.2s, color 0.2s;
+	}
+
+	nav ul a:hover {
+		background: var(--hover-bg);
+		color: var(--hover-text);
+	}
+
+	/* 主题切换按钮 */
+	#theme-toggle {
+		background: none;
+		border: 1px solid var(--border-color);
+		border-radius: 50%;
+		width: 38px;
+		height: 38px;
+		cursor: pointer;
+		font-size: 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: background 0.2s, border-color 0.2s;
+	}
+
+	#theme-toggle:hover {
+		background: var(--hover-bg);
+	}
+
+	#theme-toggle .icon {
+		line-height: 1;
+	}
+
+	#theme-toggle .sun { display: none; }
+	#theme-toggle .moon { display: inline; }
+
+	[data-theme="dark"] #theme-toggle .sun { display: inline; }
+	[data-theme="dark"] #theme-toggle .moon { display: none; }
+
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme="light"]) #theme-toggle .sun { display: inline; }
+		:root:not([data-theme="light"]) #theme-toggle .moon { display: none; }
+	}
+
+	/* 页脚 */
+	footer {
+		text-align: center;
+		padding: 1.5rem 2rem;
+		color: var(--text-secondary);
+		font-size: 0.9rem;
+		border-top: 1px solid var(--border-color);
+		transition: color 0.3s, border-color 0.3s;
+	}
+
+	/* 主体样式使用 CSS 变量 */
+	body {
+		background: var(--bg-primary);
+		color: var(--text-primary);
+		transition: background 0.3s, color 0.3s;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	html, body {
+		margin: 0;
+		width: 100%;
+		min-height: 100%;
+	}
+
+	@media (max-width: 640px) {
+		nav { padding: 0 1rem; }
+		nav ul { gap: 0.5rem; }
+		nav ul a { padding: 0.3rem 0.5rem; font-size: 0.85rem; }
 	}
 </style>

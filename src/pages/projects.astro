@@ -3,36 +3,153 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-  <h1>我的趣味作品 / 收藏</h1>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
-    
-    <!-- 作品1：CS2 音乐盒 -->
-    <div style="border: 1px solid #eee; border-radius: 12px; padding: 1rem; overflow: hidden;">
-      <img src="/cs2_musicbox.png" alt="CS2 音乐盒" style="width: 100%; border-radius: 8px;">
-      <h3 style="margin: 1rem 0 0.5rem;">CS2 趣味音乐盒</h3>
-      <p style="color: #666;">《CS2》StatTrak™ 音乐盒「ISOxo - 非人类」魔改版本，记录 MVP 次数，MVP 时高奏凯歌。</p>
-    </div>
+	<main>
+		<h1 class="gradient-text">我的趣味作品 / 收藏</h1>
+		<div class="projects-grid">
+			<!-- 作品1：CS2 音乐盒 -->
+			<div class="project-card">
+				<div class="img-wrap">
+					<img src="/cs2_musicbox.png" alt="CS2 音乐盒">
+				</div>
+				<div class="info">
+					<h3>CS2 趣味音乐盒</h3>
+					<p>《CS2》StatTrak™ 音乐盒「ISOxo - 非人类」魔改版本，记录 MVP 次数，MVP 时高奏凯歌。</p>
+					<span class="tag">游戏</span>
+				</div>
+			</div>
 
-    <!-- 作品2：伊蕾娜 GIF -->
-    <div style="border: 1px solid #eee; border-radius: 12px; padding: 1rem; overflow: hidden;">
-      <img src="/yilena.gif" alt="伊蕾娜" style="width: 100%; border-radius: 8px;">
-      <h3 style="margin: 1rem 0 0.5rem;">魔女之旅 - 伊蕾娜</h3>
-      <p style="color: #666;">《魔女之旅》主角伊蕾娜 Q 版动图，俏皮可爱的经典表情包。</p>
-    </div>
+			<!-- 作品2：伊蕾娜 GIF -->
+			<div class="project-card">
+				<div class="img-wrap">
+					<img src="/yilena.gif" alt="伊蕾娜">
+				</div>
+				<div class="info">
+					<h3>魔女之旅 - 伊蕾娜</h3>
+					<p>《魔女之旅》主角伊蕾娜 Q 版动图，俏皮可爱的经典表情包。</p>
+					<span class="tag">动漫</span>
+				</div>
+			</div>
 
-    <!-- 作品3：藤田琴音玩偶 -->
-    <div style="border: 1px solid #eee; border-radius: 12px; padding: 1rem; overflow: hidden;">
-      <img src="/futata_plush.jpg" alt="藤田琴音玩偶" style="width: 100%; border-radius: 8px;">
-      <h3 style="margin: 1rem 0 0.5rem;">藤田琴音毛绒玩偶</h3>
-      <p style="color: #666;">《学园偶像大师》藤田琴音「努努」玩偶，经典“嘘”手势表情包来源。</p>
-    </div>
+			<!-- 作品3：藤田琴音玩偶 -->
+			<div class="project-card">
+				<div class="img-wrap">
+					<img src="/futata_plush.jpg" alt="藤田琴音玩偶">
+				</div>
+				<div class="info">
+					<h3>藤田琴音毛绒玩偶</h3>
+					<p>《学园偶像大师》藤田琴音「努努」玩偶，经典"嘘"手势表情包来源。</p>
+					<span class="tag">动漫</span>
+				</div>
+			</div>
 
-    <!-- 作品4：猫咪表情包 -->
-    <div style="border: 1px solid #eee; border-radius: 12px; padding: 1rem; overflow: hidden;">
-      <img src="/cat_meme.gif" alt="猫咪表情包" style="width: 100%; border-radius: 8px;">
-      <h3 style="margin: 1rem 0 0.5rem;">慵懒猫咪表情包</h3>
-      <p style="color: #666;">经典摆烂情绪表情包，表达无所谓、慵懒的日常状态。</p>
-    </div>
-
-  </div>
+			<!-- 作品4：猫咪表情包 -->
+			<div class="project-card">
+				<div class="img-wrap">
+					<img src="/cat_meme.gif" alt="猫咪表情包">
+				</div>
+				<div class="info">
+					<h3>慵懒猫咪表情包</h3>
+					<p>经典摆烂情绪表情包，表达无所谓、慵懒的日常状态。</p>
+					<span class="tag">表情包</span>
+				</div>
+			</div>
+		</div>
+	</main>
 </Layout>
+
+<style>
+	main {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 6rem 2rem 4rem;
+	}
+
+	h1 {
+		font-size: 2.8rem;
+		font-weight: 700;
+		text-align: center;
+		margin-bottom: 3rem;
+		color: var(--text-primary);
+		transition: color 0.3s;
+	}
+
+	.gradient-text {
+		background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.projects-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 2rem;
+	}
+
+	.project-card {
+		border: 1px solid var(--border-color);
+		border-radius: 16px;
+		overflow: hidden;
+		background: var(--bg-card);
+		box-shadow: 0 2px 12px var(--shadow-color);
+		transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s, background 0.3s;
+	}
+
+	.project-card:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 12px 32px var(--shadow-hover);
+		border-color: var(--accent-secondary);
+		background: var(--bg-card-hover);
+	}
+
+	.img-wrap {
+		overflow: hidden;
+	}
+
+	.img-wrap img {
+		width: 100%;
+		display: block;
+		max-height: 220px;
+		object-fit: cover;
+		transition: transform 0.3s;
+	}
+
+	.project-card:hover .img-wrap img {
+		transform: scale(1.05);
+	}
+
+	.info {
+		padding: 1.2rem;
+	}
+
+	.info h3 {
+		margin: 0 0 0.5rem;
+		font-size: 1.15rem;
+		color: var(--text-primary);
+		transition: color 0.3s;
+	}
+
+	.info p {
+		color: var(--text-secondary);
+		font-size: 0.95rem;
+		line-height: 1.6;
+		margin: 0 0 1rem;
+		transition: color 0.3s;
+	}
+
+	.tag {
+		display: inline-block;
+		padding: 0.25rem 0.75rem;
+		background: var(--hover-bg);
+		color: var(--accent-hover);
+		border-radius: 99px;
+		font-size: 0.8rem;
+		font-weight: 500;
+		transition: background 0.3s, color 0.3s;
+	}
+
+	@media (max-width: 640px) {
+		main { padding: 5rem 1rem 3rem; }
+		h1 { font-size: 2rem; }
+	}
+</style>
